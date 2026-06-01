@@ -56,10 +56,10 @@ class LibraryTest {
     }
 
     @Test
-    void testTanggalKembali() {
+    void testTanggalJatuhTempo() {
         LocalDate pinjam = LocalDate.of(2026, 5, 30);
-        LocalDate kembali = libraryService.hitungTanggalJatuhTempo(pinjam);
+        LocalDate jatuhTempo = libraryService.hitungTanggalJatuhTempo(pinjam);
 
-        assertEquals(pinjam.plusDays(7), kembali);
+        assertEquals(pinjam.plusDays(7), jatuhTempo);
     }
 }

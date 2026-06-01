@@ -27,7 +27,7 @@ public class FormPeminjaman extends JFrame {
     private final JTextField bukuIdField = new JTextField();
     private final JTextField peminjamanIdField = new JTextField();
     private final DefaultTableModel tableModel = new DefaultTableModel(
-            new String[]{"ID", "Anggota", "Buku", "Tanggal Pinjam", "Tanggal Kembali"}, 0
+            new String[]{"ID", "Anggota", "Buku", "Tanggal Pinjam", "Harus Kembali", "Tanggal Kembali"}, 0
     );
     private List<Anggota> daftarAnggota;
     private List<Buku> daftarBuku;
@@ -107,6 +107,7 @@ public class FormPeminjaman extends JFrame {
                         peminjaman.getAnggota().displayData(),
                         peminjaman.getBuku().displayData(),
                         peminjaman.getTanggalPinjam(),
+                        peminjaman.getTanggalHarusKembali(),
                         peminjaman.getTanggalKembali() == null ? "Belum kembali" : peminjaman.getTanggalKembali()
                 });
             }

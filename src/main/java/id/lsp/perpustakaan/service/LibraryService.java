@@ -68,7 +68,7 @@ public class LibraryService {
         }
         buku.kurangiStok();
         bukuDAO.updateStok(buku.getId(), buku.getStok());
-        Peminjaman peminjaman = new Peminjaman(0, anggota, buku, tanggalPinjam, null);
+        Peminjaman peminjaman = new Peminjaman(0, anggota, buku, tanggalPinjam, hitungTanggalJatuhTempo(tanggalPinjam), null);
         int id = peminjamanDAO.tambah(peminjaman);
         peminjaman.setId(id);
         return peminjaman;

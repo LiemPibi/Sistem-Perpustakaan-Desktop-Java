@@ -20,17 +20,16 @@ import java.util.List;
  */
 public class PeminjamanDAO {
     public int tambah(Peminjaman peminjaman) throws SQLException {
-        String sql = "INSERT INTO peminjaman (anggota_id, buku_id, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO peminjaman (anggota_id, buku_id, tanggal_pinjam, tanggal_harus_kembali) VALUES (?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            LocalDate tanggalPinjam = peminjaman.getTanggalPinjam();
+            LocalDate tanggalHarusKembali = tanggalPinjam.plusDays(7);
+
             statement.setInt(1, peminjaman.getAnggota().getId());
             statement.setInt(2, peminjaman.getBuku().getId());
-            statement.setDate(3, Date.valueOf(peminjaman.getTanggalPinjam()));
-            if (peminjaman.getTanggalKembali() == null) {
-                statement.setDate(4, null);
-            } else {
-                statement.setDate(4, Date.valueOf(peminjaman.getTanggalKembali()));
-            }
+            statement.setDate(3, Date.valueOf(tanggalPinjam));
+            statement.setDate(4, Date.valueOf(tanggalHarusKembali));
             statement.executeUpdate();
             try (ResultSet keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -44,7 +43,7 @@ public class PeminjamanDAO {
     public List<Peminjaman> cariSemua() throws SQLException {
         List<Peminjaman> laporan = new ArrayList<>();
         String sql = """
-                SELECT p.id, p.tanggal_pinjam, p.tanggal_kembali,
+                SELECT p.id, p.tanggal_pinjam, p.tanggal_harus_kembali, p.tanggal_kembali,
                        a.id AS anggota_id, a.nama, a.alamat, a.telepon,
                        b.id AS buku_id, b.judul, b.penulis, b.stok
                 FROM peminjaman p
@@ -91,6 +90,7 @@ public class PeminjamanDAO {
                 anggota,
                 buku,
                 resultSet.getDate("tanggal_pinjam").toLocalDate(),
+                resultSet.getDate("tanggal_harus_kembali").toLocalDate(),
                 tanggalKembali == null ? null : tanggalKembali.toLocalDate()
         );
     }

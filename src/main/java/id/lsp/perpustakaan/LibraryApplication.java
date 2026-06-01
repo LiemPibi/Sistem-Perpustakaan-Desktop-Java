@@ -11,6 +11,7 @@ public class LibraryApplication {
     public static void main(String[] args) {
 
         try {
+            DatabaseConnection.initializeSchema();
             Connection conn = DatabaseConnection.getConnection();
             System.out.println("Koneksi database berhasil!");
             conn.close();

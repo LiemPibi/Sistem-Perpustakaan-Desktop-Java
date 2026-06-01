@@ -10,16 +10,22 @@ public class Peminjaman implements Displayable {
     private Anggota anggota;
     private Buku buku;
     private LocalDate tanggalPinjam;
+    private LocalDate tanggalHarusKembali;
     private LocalDate tanggalKembali;
 
     public Peminjaman() {
     }
 
     public Peminjaman(int id, Anggota anggota, Buku buku, LocalDate tanggalPinjam, LocalDate tanggalKembali) {
+        this(id, anggota, buku, tanggalPinjam, tanggalPinjam == null ? null : tanggalPinjam.plusDays(7), tanggalKembali);
+    }
+
+    public Peminjaman(int id, Anggota anggota, Buku buku, LocalDate tanggalPinjam, LocalDate tanggalHarusKembali, LocalDate tanggalKembali) {
         this.id = id;
         this.anggota = anggota;
         this.buku = buku;
         this.tanggalPinjam = tanggalPinjam;
+        this.tanggalHarusKembali = tanggalHarusKembali;
         this.tanggalKembali = tanggalKembali;
     }
 
@@ -55,6 +61,14 @@ public class Peminjaman implements Displayable {
         this.tanggalPinjam = tanggalPinjam;
     }
 
+    public LocalDate getTanggalHarusKembali() {
+        return tanggalHarusKembali;
+    }
+
+    public void setTanggalHarusKembali(LocalDate tanggalHarusKembali) {
+        this.tanggalHarusKembali = tanggalHarusKembali;
+    }
+
     public LocalDate getTanggalKembali() {
         return tanggalKembali;
     }
@@ -69,7 +83,7 @@ public class Peminjaman implements Displayable {
 
     @Override
     public String displayData() {
-        String status = sudahDikembalikan() ? "Kembali: " + tanggalKembali : "Dipinjam";
+        String status = sudahDikembalikan() ? "Kembali: " + tanggalKembali : "Harus kembali: " + tanggalHarusKembali;
         return id + " - " + anggota.getNama() + " meminjam " + buku.getJudul() + " (" + status + ")";
     }
 }

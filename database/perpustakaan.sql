@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS peminjaman (
     anggota_id INT NOT NULL,
     buku_id INT NOT NULL,
     tanggal_pinjam DATE NOT NULL,
-    tanggal_kembali DATE,
+    tanggal_harus_kembali DATE NOT NULL,
+    tanggal_kembali DATE NULL,
     FOREIGN KEY (anggota_id) REFERENCES anggota(id),
     FOREIGN KEY (buku_id) REFERENCES buku(id)
 );

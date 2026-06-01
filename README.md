@@ -69,6 +69,9 @@ mvn test
 
 ```text
 id.lsp.perpustakaan.LibraryApplication
+
+Atau dari cmd menggunakan
+mvn exec:java -Dexec.mainClass="id.lsp.perpustakaan.LibraryApplication"
 ```
 
 Akun demo:
@@ -96,17 +99,3 @@ java \
 - Dokumentasi program: `docs/DOKUMENTASI_PROGRAM.md`.
 - Laporan debugging: `docs/LAPORAN_DEBUGGING.md`.
 - Unit test: `src/test/java/id/lsp/perpustakaan/LibraryTest.java`.
-
-## Pemetaan Unit Kompetensi
-
-| Unit | Bukti Implementasi |
-| 1. Menggunakan spesifikasi program | UML dan dokumen requirement. |
-| 2. Coding guideline | Naming convention Java dan JavaDoc. |
-| 3. Pemrograman terstruktur | If-else, loop, method, collection, validasi input. |
-| 4. OOP | Model, inheritance, interface, polymorphism. |
-| 5. Library external | MySQL Connector/J dan JUnit 5. |
-| 6. Basis data | MySQL schema, CRUD DAO, foreign key, index. |
-| 7. Dokumentasi program | JavaDoc, README, manual, UML. |
-| 8. Debugging | Laporan debugging dan penanganan exception. |
-| 9. Unit testing | JUnit 5 test suite. |
-
